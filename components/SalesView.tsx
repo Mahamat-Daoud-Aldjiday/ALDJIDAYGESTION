@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Sale } from '../types';
 import { ShoppingCart, Search, Calendar, FileDown } from 'lucide-react';
@@ -7,7 +8,8 @@ interface Props {
   onDelete: (id: string) => void;
 }
 
-const SalesView: React.FC<Props> = ({ sales }) => {
+/* Corrected destructuring to include onDelete from Props */
+const SalesView: React.FC<Props> = ({ sales, onDelete }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredSales = sales.filter(s => 

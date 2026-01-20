@@ -21,10 +21,18 @@ const SettingsView: React.FC<Props> = ({ settings, onUpdate, onLogout }) => {
     const confirmPass = formData.get('confirmPass') as string;
     const newShopName = formData.get('shopName') as string;
 
-    if (newPass && newPass !== confirmPass) {
-      setError('Les mots de passe ne correspondent pas');
-      setSuccess('');
-      return;
+    // Validation du mot de passe (8 chiffres nets)
+    if (newPass) {
+      if (!/^\d{8}$/.test(newPass)) {
+        setError('Le mot de passe doit contenir exactement 8 chiffres');
+        setSuccess('');
+        return;
+      }
+      if (newPass !== confirmPass) {
+        setError('Les mots de passe ne correspondent pas');
+        setSuccess('');
+        return;
+      }
     }
 
     onUpdate({
@@ -130,26 +138,32 @@ const SettingsView: React.FC<Props> = ({ settings, onUpdate, onLogout }) => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Nouveau Mot de Passe</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Nouveau Mot de Passe (8 chiffres)</label>
                 <div className="relative">
                   <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                   <input 
-                    type="password"
+                    type="text"
                     name="adminPass" 
-                    placeholder="••••••••" 
-                    className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:ring-2 focus:ring-emerald-500/20 dark:text-white" 
+                    placeholder="8 chiffres" 
+                    maxLength={8}
+                    pattern="\d{8}"
+                    inputMode="numeric"
+                    className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:ring-2 focus:ring-emerald-500/20 dark:text-white font-bold tracking-widest" 
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Confirmer</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Confirmer (8 chiffres)</label>
                 <div className="relative">
                   <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                   <input 
-                    type="password"
+                    type="text"
                     name="confirmPass" 
-                    placeholder="••••••••" 
-                    className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:ring-2 focus:ring-emerald-500/20 dark:text-white" 
+                    placeholder="8 chiffres" 
+                    maxLength={8}
+                    pattern="\d{8}"
+                    inputMode="numeric"
+                    className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:ring-2 focus:ring-emerald-500/20 dark:text-white font-bold tracking-widest" 
                   />
                 </div>
               </div>

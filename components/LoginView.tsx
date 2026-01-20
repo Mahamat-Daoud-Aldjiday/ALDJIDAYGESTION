@@ -58,7 +58,7 @@ const LoginView: React.FC<Props> = ({ settings, onLogin }) => {
             </div>
 
             <div>
-              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Mot de passe</label>
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Mot de passe (8 chiffres)</label>
               <div className="relative">
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                 <input
@@ -67,7 +67,10 @@ const LoginView: React.FC<Props> = ({ settings, onLogin }) => {
                   value={adminPass}
                   onChange={(e) => setAdminPass(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:ring-4 focus:ring-emerald-500/10 dark:focus:ring-emerald-500/5 focus:border-emerald-500 transition-all dark:text-white"
+                  maxLength={8}
+                  pattern="\d{8}"
+                  inputMode="numeric"
+                  className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:ring-4 focus:ring-emerald-500/10 dark:focus:ring-emerald-500/5 focus:border-emerald-500 transition-all dark:text-white tracking-widest font-black"
                 />
               </div>
             </div>

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Expense } from '../types';
 import { Receipt, Plus, Trash2 } from 'lucide-react';
@@ -23,6 +24,12 @@ const ExpensesView: React.FC<Props> = ({ expenses, onAdd, onDelete }) => {
     };
     onAdd(expense);
     setIsAdding(false);
+  };
+
+  const handleDeleteExpense = (expense: Expense) => {
+    if (window.confirm(`Voulez-vous vraiment supprimer la dépense "${expense.description}" de ${expense.amount.toLocaleString()} Fcfa ?`)) {
+      onDelete(expense.id);
+    }
   };
 
   const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
@@ -79,7 +86,7 @@ const ExpensesView: React.FC<Props> = ({ expenses, onAdd, onDelete }) => {
                 <div className="flex items-center gap-6">
                   <span className="text-lg font-bold text-slate-800 dark:text-slate-100">-{expense.amount.toLocaleString()} Fcfa</span>
                   <button 
-                    onClick={() => onDelete(expense.id)}
+                    onClick={() => handleDeleteExpense(expense)}
                     className="p-2 text-slate-300 hover:text-rose-600 transition-colors"
                     title="Supprimer"
                   >
